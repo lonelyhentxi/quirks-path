@@ -1,0 +1,20 @@
+[package]
+name = "quirks_path"
+version = "0.1.0"
+edition = "2021"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = [
+  'cfg(rust_comp_feature, values("unstable_features"))',
+] }
+
+[features]
+default = ["url"]
+url = ["dep:url"]
+
+[dependencies]
+cfg_rust_features = "0.1.2"
+nom = ">=7"
+percent-encoding = ">=2"
+thiserror = ">=1"
+url = { version = ">=2", optional = true }
