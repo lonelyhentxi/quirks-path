@@ -2,19 +2,29 @@
 
 A Rust path library with quirks that is as platform-agnostic as possible.
 
-## Install
+## Quick Start
+
+### Install
 
 ```shell
 cargo install quirks-path
 ```
 
-## Usage
+### Import
 
-```
+```rust
 use quirks_path::{ Path, PathBuf };
 ```
 
-## Support
+## FAQ
+
+### 1. Why create a quirky path library?
+
+Forked from std::path, the library provides as much cross-platform path manipulation capability as possible. 
+
+One major use case is serving as an intermediary server: receiving path data from clients, performing path operations, and then forwarding it to a third party service (with the third party's system platform determined solely by the client).
+
+### 2. Support List
 
 - *nix Paths (without `/`): `/bin/sh`
 - Windows Verbatim: `\\?\cat_pics`
@@ -24,7 +34,7 @@ use quirks_path::{ Path, PathBuf };
 - Windows UNC: `\\server\share`
 - Windows Disk: `C:`
 
-## Quirks
+### 3. Quirks
 
 - Think any of / or \ be a seperator or special mark
 

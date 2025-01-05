@@ -2187,10 +2187,10 @@ impl Path {
     /// the current directory.
     ///
     /// * On Unix, a path is absolute if it starts with the root, so
-    /// `is_absolute` and [`has_root`] are equivalent.
+    ///   `is_absolute` and [`has_root`] are equivalent.
     ///
     /// * On Windows, a path is absolute if it has a prefix and starts with the
-    /// root: `c:\windows` is absolute, while `c:temp` and `\temp` are not.
+    ///   root: `c:\windows` is absolute, while `c:temp` and `\temp` are not.
     ///
     /// # Examples
     ///
