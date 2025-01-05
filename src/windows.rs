@@ -19,7 +19,7 @@ pub fn parse_drive(path: &str) -> IResult<&str, char> {
 
 pub fn parse_drive_exact(path: &str) -> IResult<&str, char> {
     context("drive_exact", pair(parse_drive, complete::char(':')))(path)
-        .map(|(path, (drive, _))| (path, drive))
+        .map(|(path, (drive, _))| (path, drive.to_ascii_uppercase()))
 }
 
 pub fn is_windows_verbatim_sep(c: char) -> bool {
