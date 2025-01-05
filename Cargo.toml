@@ -2,6 +2,8 @@
 name = "quirks_path"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = "A Rust path library with quirks that is as platform-agnostic as possible."
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = [
