@@ -1,6 +1,10 @@
-# quirks-path
+<h1 align="center">
+  <img src="./icon.svg" height=180>
+  <br />
+  <div align="center"><a href="https://crates.io/crates/quirks_paths"><img src="https://img.shields.io/crates/v/quirks-path.svg" alt="version-badge"/></a> <a href="https://docs.rs/quirks_paths"><img src="https://img.shields.io/badge/docs-latest-blue.svg" alt="docs-badge" /></a></div>
+</h1>
 
-A Rust path library with quirks that is as platform-agnostic as possible.
+<p align="center">A Rust path library with quirks that is as platform-agnostic as possible.</p>
 
 ## Quick Start
 
