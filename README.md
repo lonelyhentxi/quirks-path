@@ -30,7 +30,7 @@ One major use case is serving as an intermediary server: receiving path data fro
 
 ### 2. Support List
 
-- *nix Paths (without `/`): `/bin/sh`
+- *nix Paths (without `\`): `/bin/sh`
 - Windows Verbatim: `\\?\cat_pics`
 - Windows Verbatim UNC: `\\?\UNC\server\share`
 - Windows Verbatim Disk: `\\?\C:`

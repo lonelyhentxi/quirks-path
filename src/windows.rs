@@ -1,10 +1,10 @@
 use nom::{
     bytes::complete::tag,
     character::complete::{self, satisfy},
-    combinator::peek,
+    combinator::{map, peek},
     error::{context, ContextError, Error, ErrorKind, ParseError},
-    sequence::pair,
-    AsChar, IResult, InputIter, InputTakeAtPosition,
+    sequence::terminated,
+    AsChar, IResult, Input, Parser,
 };
 
 use crate::Prefix;
@@ -14,12 +14,17 @@ fn non_slash(input: &str) -> IResult<&str, &str> {
 }
 
 pub fn parse_drive(path: &str) -> IResult<&str, char> {
-    context("drive", satisfy(char::is_alpha))(path).map(|a: (&str, char)| a)
+    context("drive", satisfy(char::is_alpha)).parse(path)
 }
 
 pub fn parse_drive_exact(path: &str) -> IResult<&str, char> {
-    context("drive_exact", pair(parse_drive, complete::char(':')))(path)
-        .map(|(path, (drive, _))| (path, drive.to_ascii_uppercase()))
+    context(
+        "drive_exact",
+        map(terminated(parse_drive, complete::char(':')), |drive| {
+            drive.to_ascii_uppercase()
+        }),
+    )
+    .parse(path)
 }
 
 pub fn is_windows_verbatim_sep(c: char) -> bool {
@@ -61,7 +66,7 @@ fn context_verify_error<'a>(input: &'a str, context: &'static str) -> nom::Err<E
 pub fn parse_windows_path_prefix(raw_path: &str) -> IResult<&str, Prefix<'_>> {
     if let Ok((path, _)) = tag(r"\\")(raw_path) as IResult<&str, &str> {
         if let Ok((path, _)) = tag(r"?\")(path) as IResult<&str, &str> {
-            if let Ok((path, _)) = peek(non_slash)(path) as IResult<&str, &str> {
+            if let Ok((path, _)) = peek(non_slash).parse(path) as IResult<&str, &str> {
                 if let Ok((path, _)) = tag(r"UNC\")(path) as IResult<&str, &str> {
                     let (server, _, other) = parse_windows_next_component(path, true);
                     let (share, next_input, _) = parse_windows_next_component(other, true);
